@@ -1,0 +1,44 @@
+// IrfanView JC Filter Sandbox
+// Class: zebrafycolor
+// Filter: f
+// Author: Jewe
+// Description: "Provides an ZebrafyColor Effect"
+
+class zebrafycolor : f
+{
+  string name = "ZebrafyColor";
+  string author = "Jewe";
+  string description = "Provides an ZebrafyColor Effect";
+
+  float source_blur = 0.0;     // 0 .. 50
+  float frequency   = 10.0;    // 0 .. 50
+  int   color        = 0x000000; // #000000 .. #FFFFFF
+
+  void process()
+  {
+    float u = x / width;
+    float v = y / height;
+
+    float blur = source_blur;
+    float freq = frequency;
+
+    float stripe = sin((u + v) * freq * 6.2831853);
+    float mask = stripe > 0.0 ? 1.0 : 0.0;
+
+    pixel src = sample_blur(x, y, blur);
+
+    int cr = (color >> 16) & 255;
+    int cg = (color >> 8) & 255;
+    int cb = color & 255;
+
+    pixel zebra;
+    zebra.r = cr;
+    zebra.g = cg;
+    zebra.b = cb;
+    zebra.a = src.a;
+
+    out = lerp(src, zebra, mask);
+  }
+}
+
+// ras filterize
