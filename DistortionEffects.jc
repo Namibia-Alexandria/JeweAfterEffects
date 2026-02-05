@@ -1,0 +1,51 @@
+class DistortionEffects {
+    author = "Jewe";
+    filter = "f";
+    description = "Provides a Distortion Effects effect code: option value swirl/wave/lens distortion/pinch and bulge";
+
+    // Options: swirl, wave, lens distortion, pinch, bulge
+    option = "swirl";  // Example default, can be set to any of the options
+
+    // Rotation or angle in degrees
+    a_r = 0;           // -360 to 360
+
+    // Horizontal, Vertical, Angle, Width parameters
+    h = 0;             // 0 to 6.284
+    v = 0;             // 0 to 6.284
+    a = 0;             // 0 to 6.284
+    w = 0;             // 0 to 6.284
+
+    // Center x/y, scale, and radial scale
+    cx = 0;            // -1 to 1
+    cy = 0;            // -1 to 1
+    s = 1;             // -1 to 1
+    rs = 0;            // -1 to 1
+
+    // Additional angle or rotation
+    ar = 0;            // -10 to 10
+
+    // Apply the effect
+    apply() {
+        ras.filterize("distortion", {
+            option: this.option,
+            a_r: this.a_r,
+            h: this.h,
+            v: this.v,
+            a: this.a,
+            w: this.w,
+            cx: this.cx,
+            cy: this.cy,
+            s: this.s,
+            rs: this.rs,
+            ar: this.ar
+        });
+    }
+}
+
+// Example usage
+let f = new DistortionEffects();
+f.option = "wave";
+f.a_r = 45;
+f.h = 3.14;
+f.cx = 0.5;
+f.apply();

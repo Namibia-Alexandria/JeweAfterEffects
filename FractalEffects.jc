@@ -1,0 +1,23 @@
+class FractalEffects {
+    filter f;
+    author "Jewe";
+    description "Provides a Fractal Effects effect code: option value cc tile/halftone";
+
+    // Options
+    option "effectType" value "cc tile, halftone";
+
+    // Effect controls
+    control "cx" range -100 to 100;
+    control "cy" range -100 to 100;
+    control "h" range -100 to 100;
+    control "v" range -100 to 100;
+    control "s" range -100 to 100;
+    control "color" range 0 to 100;
+    control "shape" range 0 to 100;
+
+    code ras {
+        // Fractal effect processing logic
+        // All values are treated as strings
+        applyEffect(effectType, cx, cy, h, v, s, color, shape);
+    }
+}

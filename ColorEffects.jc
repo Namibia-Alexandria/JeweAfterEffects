@@ -1,0 +1,31 @@
+class ColorEffects {
+    filter f;
+    author "Jewe";
+    description "Provides a Color Effects effect code: option value hsl adjust/invert/rgb split";
+    
+    // Effect options as strings
+    string option = "hsl adjust"; // "hsl adjust", "invert", "rgb split"
+    
+    // Effect controls
+    float h = 0;    // Hue -360 to 360
+    float s = 0;    // Saturation -360 to 360
+    float l = 0;    // Lightness -360 to 360
+    float r = 0;    // Red -1 to 1
+    float g = 0;    // Green -1 to 1
+    float b = 0;    // Blue -1 to 1
+    float a = 0;    // Alpha -360 to 360
+    float s_angle = 0; // Split angle -360 to 360
+    
+    // Apply the filter effect
+    void apply() {
+        if (option == "hsl adjust") {
+            f.hue(h);
+            f.saturation(s);
+            f.lightness(l);
+        } else if (option == "invert") {
+            f.invert();
+        } else if (option == "rgb split") {
+            f.rgbSplit(r, g, b, a, s_angle);
+        }
+    }
+}
