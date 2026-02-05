@@ -1,0 +1,57 @@
+class CC_Kaleida
+{
+  filter f;
+  author "Jewe";
+  name "CC Kaleida";
+  description "Provides an CC Kaleida effect";
+
+  string style = "normal";
+
+  param size
+  {
+    type slider;
+    min 0;
+    max 100;
+    default 50;
+  }
+
+  param angle
+  {
+    type slider;
+    min -360;
+    max 360;
+    default 0;
+  }
+
+  param style
+  {
+    type option;
+    value "normal";
+    value "flower";
+    value "star";
+  }
+
+  ras
+  {
+    cx = w / 2;
+    cy = h / 2;
+
+    dx = x - cx;
+    dy = y - cy;
+
+    r = sqrt(dx*dx + dy*dy);
+    a = atan2(dy, dx) + angle * 0.01745329252;
+
+    seg = 1;
+    if (style == "flower") seg = 6 + size;
+    if (style == "star") seg = 4 + size;
+
+    k = 6.28318530718 / seg;
+    a = abs(mod(a, k) - k/2);
+
+    nx = cx + cos(a) * r;
+    ny = cy + sin(a) * r;
+
+    f = getpixel(nx, ny);
+  }
+}
